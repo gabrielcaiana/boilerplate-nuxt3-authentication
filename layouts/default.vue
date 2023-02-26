@@ -2,6 +2,7 @@
 
 <template>
   <main class="h-screen">
+    <UIToast />
     <slot />
   </main>
 </template>

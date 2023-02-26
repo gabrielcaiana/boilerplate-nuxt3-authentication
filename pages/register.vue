@@ -1,11 +1,18 @@
 <script setup lang="ts">
+import { User } from '~/types/user';
+const { $bus } = useNuxtApp();
+
 useHead({
   title: 'Registre-se',
 });
 
+// import composable signup
+const { signUp } = useAuth();
+
 const router = useRouter();
 
-const data = reactive({
+// reactive data
+const data = reactive<User>({
   name: '',
   username: '',
   email: '',
@@ -14,12 +21,20 @@ const data = reactive({
   repeatPassword: '',
 });
 
-const handleRigister = () => {
-  alert(JSON.stringify(data));
-};
-
+// redirect to login page
 const handleLoginPage = () => {
   router.push('/login');
+};
+
+// handle register
+const handleRigister = async () => {
+  try {
+    await signUp(data);
+    handleLoginPage();
+    $bus.$emit('toast:success', { message: 'Usuário criado com sucesso!' });
+  } catch (error) {
+    console.error(error);
+  }
 };
 </script>
 
@@ -29,6 +44,7 @@ const handleLoginPage = () => {
       <h1 class="text-2xl font-medium text-gray-700">Crie sua conta</h1>
       <div>
         <VField
+          v-model="data.name"
           type="text"
           name="name"
           rules="required|minMax:5,20"
@@ -40,6 +56,7 @@ const handleLoginPage = () => {
 
       <div>
         <VField
+          v-model="data.username"
           type="text"
           name="username"
           rules="required|minMax:5,12"
@@ -51,6 +68,7 @@ const handleLoginPage = () => {
 
       <div>
         <VField
+          v-model="data.email"
           type="email"
           name="email"
           rules="required|email"
@@ -62,6 +80,7 @@ const handleLoginPage = () => {
 
       <div>
         <VField
+          v-model="data.profileImage"
           type="text"
           name="profileImage"
           rules="required|url"
@@ -73,6 +92,7 @@ const handleLoginPage = () => {
 
       <div>
         <VField
+          v-model="data.password"
           type="password"
           name="password"
           rules="required|minMax:5,16"
@@ -84,6 +104,7 @@ const handleLoginPage = () => {
 
       <div>
         <VField
+          v-model="data.repeatPassword"
           type="password"
           name="repeatPassword"
           rules="required|minMax:5,16|confirmed:password"
