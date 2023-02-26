@@ -19,6 +19,7 @@
     "nuxt-icon": "^0.3.2"
   },
   "dependencies": {
+    "@formkit/nuxt": "^1.0.0-beta.15",
     "@nuxtjs/tailwindcss": "^6.4.1"
   }
 }
