@@ -9,3 +9,8 @@ export interface User {
   name?: string | null;
   profileImage?: string | null;
 }
+
+export interface UserLogin {
+  username: string;
+  password: string;
+}
