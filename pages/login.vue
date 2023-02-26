@@ -11,7 +11,7 @@ const data = reactive({
 });
 
 const handleLogin = () => {
-  alert('hello world');
+  alert(JSON.stringify(data));
 };
 
 const handleRegisterPage = () => {
