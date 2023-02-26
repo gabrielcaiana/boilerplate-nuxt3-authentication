@@ -59,7 +59,7 @@ const handleRigister = async () => {
           v-model="data.username"
           type="text"
           name="username"
-          rules="required|minMax:5,12"
+          rules="required|minMax:5,20"
           placeholder="Enter username"
           class="block border border-gray-400 p-2 rounded-md w-full"
         />
