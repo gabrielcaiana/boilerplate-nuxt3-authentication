@@ -2,17 +2,18 @@
 const data = reactive({
   username: '',
   password: '',
+  confirmPassword: '',
 });
 
-const handleLogin = () => {
+const handleRegister = () => {
   // Do something with the data
   alert(JSON.stringify(data));
 };
 </script>
 
 <template>
-  <FormKit type="form" submit-label="Login" @submit="handleLogin">
-    <h1 class="text-xl mb-4">Login</h1>
+  <FormKit type="form" submit-label="Criar conta" @submit="handleRegister">
+    <h1 class="text-xl mb-4">Criar conta</h1>
     <FormKit
       v-model="data.username"
       type="text"
@@ -31,6 +32,17 @@ const handleLogin = () => {
       id="password"
       label="Password"
       help="Your password"
+      placeholder="********"
+      validation="required"
+    />
+
+    <FormKit
+      v-model="data.confirmPassword"
+      type="password"
+      name="confirmPassword"
+      id="confirmPassword"
+      label="Confirm password"
+      help="Confirm your password"
       placeholder="********"
       validation="required"
     />
