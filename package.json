@@ -16,10 +16,12 @@
     "@commitlint/config-conventional": "^17.4.4",
     "husky": "^8.0.3",
     "nuxt": "^3.2.2",
-    "nuxt-icon": "^0.3.2"
+    "nuxt-icon": "^0.3.2",
+    "prisma": "4.3.1"
   },
   "dependencies": {
     "@formkit/nuxt": "^1.0.0-beta.15",
-    "@nuxtjs/tailwindcss": "^6.4.1"
+    "@nuxtjs/tailwindcss": "^6.4.1",
+    "@prisma/client": "4.3.1"
   }
 }
