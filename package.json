@@ -24,6 +24,8 @@
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.4.1",
     "@prisma/client": "4.3.1",
-    "bcrypt": "^5.1.0"
+    "@vee-validate/rules": "^4.7.4",
+    "bcrypt": "^5.1.0",
+    "vee-validate": "^4.7.4"
   }
 }
