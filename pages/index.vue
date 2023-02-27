@@ -2,8 +2,12 @@
 useHead({
   title: 'Home',
 });
+
+const { useStateUser } = useAuth();
+
+const user = useStateUser();
 </script>
 
 <template>
-  <div>Home</div>
+  <div>{{ user }}</div>
 </template>

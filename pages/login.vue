@@ -17,6 +17,7 @@ const handleLogin = async () => {
   data.loading = true;
   try {
     await signIn({ username: data.username, password: data.password });
+    router.push('/');
   } catch (error) {
     console.error(error);
   } finally {
@@ -31,8 +32,7 @@ const handleRegisterPage = () => {
 
 <template>
   <div class="container mx-auto p-10 h-full flex items-center justify-center">
-    <UISpinner v-if="data.loading" />
-    <VForm v-else @submit="handleLogin" class="flex flex-col gap-4 p-10 w-2/5">
+    <VForm @submit="handleLogin" class="flex flex-col gap-4 p-10 w-2/5">
       <h1 class="text-2xl font-medium text-gray-700">Faça Login</h1>
       <div>
         <VField
@@ -58,13 +58,18 @@ const handleRegisterPage = () => {
         <VErrorMessage name="password" class="text-red-500" />
       </div>
 
-      <UIButton label="Login" type="submit" />
-      <UIButton
-        label="Cadastre-se"
-        type="button"
-        color="secondary"
-        @click="handleRegisterPage"
-      />
+      <div class="flex items-center justify-center w-full" v-if="data.loading">
+        <UISpinner />
+      </div>
+      <div class="flex flex-col w-full gap-2" v-else>
+        <UIButton label="Login" type="submit" />
+        <UIButton
+          label="Cadastre-se"
+          type="button"
+          color="secondary"
+          @click="handleRegisterPage"
+        />
+      </div>
     </VForm>
   </div>
 </template>
