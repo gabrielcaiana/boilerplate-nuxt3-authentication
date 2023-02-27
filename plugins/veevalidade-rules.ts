@@ -1,10 +1,11 @@
 import { defineRule } from 'vee-validate';
-import { required, email, min } from '@vee-validate/rules';
+import { required, email, min, url } from '@vee-validate/rules';
 
 export default defineNuxtPlugin((nuxtApp) => {
   defineRule('required', required);
   defineRule('email', email);
   defineRule('min', min);
+  defineRule('url', url);
 
   // define custom rules
   defineRule('minMax', (value: string, [min, max]: any) => {
