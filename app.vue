@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const { useStateLoading } = useAuth();
-const isAuthLoading = useStateLoading();
+const isLoading = useStateLoading();
 </script>
 
 <template>
   <div>
-    <UILoading v-if="isAuthLoading" />
+    <UILoading v-if="isLoading" />
     <NuxtLayout v-else>
       <NuxtPage />
     </NuxtLayout>
