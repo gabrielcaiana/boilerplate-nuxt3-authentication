@@ -1,14 +1,13 @@
 import { defineRule } from 'vee-validate';
-import AllRules from '@vee-validate/rules';
+import { required, email, min } from '@vee-validate/rules';
 
 export default defineNuxtPlugin((nuxtApp) => {
-  // import all rules
-  Object.keys(AllRules).forEach((rule) => {
-    defineRule(rule, AllRules[rule]);
-  });
-
   // define custom rules
   defineRule('minMax', (value: string, [min, max]: any) => {
+    defineRule('required', required);
+    defineRule('email', email);
+    defineRule('min', min);
+
     // The field is empty so it should pass
     if (!value || !value.length) {
       return true;
