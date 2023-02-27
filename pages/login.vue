@@ -3,15 +3,25 @@ useHead({
   title: 'Login',
 });
 
+const { signIn } = useAuth();
+
 const router = useRouter();
 
 const data = reactive({
   username: '',
   password: '',
+  loading: false,
 });
 
-const handleLogin = () => {
-  alert(JSON.stringify(data));
+const handleLogin = async () => {
+  data.loading = true;
+  try {
+    await signIn({ username: data.username, password: data.password });
+  } catch (error) {
+    console.error(error);
+  } finally {
+    data.loading = false;
+  }
 };
 
 const handleRegisterPage = () => {
@@ -21,10 +31,12 @@ const handleRegisterPage = () => {
 
 <template>
   <div class="container mx-auto p-10 h-full flex items-center justify-center">
-    <VForm @submit="handleLogin" class="flex flex-col gap-4 p-10 w-2/5">
+    <UISpinner v-if="data.loading" />
+    <VForm v-else @submit="handleLogin" class="flex flex-col gap-4 p-10 w-2/5">
       <h1 class="text-2xl font-medium text-gray-700">Faça Login</h1>
       <div>
         <VField
+          v-model="data.username"
           type="text"
           name="username"
           rules="required"
@@ -36,6 +48,7 @@ const handleRegisterPage = () => {
 
       <div>
         <VField
+          v-model="data.password"
           type="password"
           name="password"
           rules="required"
