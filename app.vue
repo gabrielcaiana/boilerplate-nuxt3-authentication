@@ -10,6 +10,9 @@ onBeforeMount(() => {
 
 <template>
   <div>
+    <!-- toast -->
+    <UIToast />
+
     <!-- is loading -->
     <UILoading v-if="isAuthLoading" />
 
