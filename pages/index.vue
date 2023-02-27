@@ -3,11 +3,18 @@ useHead({
   title: 'Home',
 });
 
-const { useStateUser } = useAuth();
-
+const { useStateUser, logout } = useAuth();
 const user = useStateUser();
+
+const handleLogout = () => {
+  logout();
+};
 </script>
 
 <template>
-  <div>{{ user }}</div>
+  <div>
+    <pre>{{ user }}</pre>
+
+    <UIButton @click="handleLogout" label="Logout" />
+  </div>
 </template>

@@ -25,3 +25,12 @@ export const getRefreshTokenByToken = (token: Token) => {
     },
   });
 };
+
+// delete a refresh token by user id
+export const deleteRefreshToken = (token: Token) => {
+  return prisma.refreshToken.delete({
+    where: {
+      token,
+    },
+  });
+};

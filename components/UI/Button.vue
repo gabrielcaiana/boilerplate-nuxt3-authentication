@@ -29,7 +29,7 @@ const btnClasses = computed(() => {
   <button
     @click="handleClick"
     :class="[
-      'border transition-colors py-3 font-medium rounded-md',
+      'border transition-colors py-3 font-medium rounded-md min-w-[120px]',
       btnClasses,
     ]"
   >

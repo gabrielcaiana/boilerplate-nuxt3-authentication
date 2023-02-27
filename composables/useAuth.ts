@@ -114,7 +114,7 @@ export default () => {
       }
 
       // recalculates time remaining after token refresh attempt
-      const newJwt: JwtDecode = jwt_decode(useStateToken().value);
+      const newJwt: JwtDecode = jwt_decode(useStateToken().value as string);
       remainingTime = newJwt.exp * 1000 - Date.now() - 60000;
     }
   };
@@ -154,9 +154,26 @@ export default () => {
     });
   };
 
+  const logout = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await useFetchApi('/api/auth/logout/', {
+          method: 'POST',
+        });
+
+        setToken(null as any);
+        setUser({} as User);
+        resolve(true);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
   return {
     signUp,
     signIn,
+    logout,
     initAuth,
     useStateUser,
     useStateToken,

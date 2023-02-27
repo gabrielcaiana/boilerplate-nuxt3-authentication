@@ -10,6 +10,11 @@ export default defineNuxtPlugin(async () => {
   addRouteMiddleware((to, from) => {
     const user = useStateUser();
     const publicRoutes = ['/login', '/register'];
+    const router = useRouter();
+
+    watch(user, (value) => {
+      if (!value.id) router.go(0);
+    });
 
     if (user.value && publicRoutes.includes(to.path)) {
       return { path: '/' };
@@ -18,7 +23,6 @@ export default defineNuxtPlugin(async () => {
     if (!user.value && !publicRoutes.includes(to.path)) {
       return { path: '/login' };
     }
-
     return true;
   });
 });
