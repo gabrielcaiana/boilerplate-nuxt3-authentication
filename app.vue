@@ -1,14 +1,26 @@
 <script setup lang="ts">
-const { useStateLoading } = useAuth();
-const isLoading = useStateLoading();
+const { useStateUser, initAuth, useStateLoading } = useAuth();
+const user = useStateUser();
+const isAuthLoading = useStateLoading();
+
+onBeforeMount(() => {
+  initAuth();
+});
 </script>
 
 <template>
   <div>
-    <UILoading v-if="isLoading" />
-    <NuxtLayout v-else>
+    <!-- is loading -->
+    <UILoading v-if="isAuthLoading" />
+
+    <!-- is logeed in -->
+    <NuxtLayout v-else-if="user">
+      <NuxtLoadingIndicator />
       <NuxtPage />
     </NuxtLayout>
+
+    <!-- is not logged in -->
+    <AuthPage v-else />
   </div>
 </template>
 

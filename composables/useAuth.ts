@@ -163,7 +163,7 @@ export default () => {
         });
 
         setToken(null as any);
-        setUser({} as User);
+        setUser(null as any);
         resolve(true);
       } catch (error) {
         reject(error);
