@@ -31,7 +31,10 @@ const handleRigister = async () => {
   try {
     await signUp(data);
     handleLoginPage();
-    $bus.$emit('toast:success', { message: 'Usuário criado com sucesso!' });
+    $bus.$emit('toast', {
+      message: 'Usuário criado com sucesso!',
+      type: 'success',
+    });
   } catch (error) {
     console.error(error);
   }

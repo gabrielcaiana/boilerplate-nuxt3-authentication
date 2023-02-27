@@ -3,10 +3,13 @@ const { $bus } = useNuxtApp();
 
 const show = ref(false);
 const message = ref('');
+const type = ref('');
 
-$bus.$on('toast:success', (data: any) => {
+$bus.$on('toast', (data: any) => {
   show.value = true;
   message.value = data.message;
+  type.value = data.type;
+
   setTimeout(() => (show.value = false), 3000);
 });
 
@@ -19,25 +22,23 @@ const closeToast = () => {
   <div
     v-if="show"
     id="toast-success"
-    class="fixed right-6 top-6 mb-4 flex w-full max-w-xs items-center rounded-lg bg-white p-4 text-gray-500 drop-shadow-2xl"
+    :class="[
+      'fixed right-6 top-6 mb-4 flex w-full max-w-xs items-center rounded-lg p-4 text-gray-500',
+      type === 'success' ? 'bg-green-100' : '',
+      type === 'warning' ? 'bg-yellow-100' : '',
+      type === 'error' ? 'bg-red-100' : '',
+    ]"
     role="alert"
   >
     <div
-      class="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500"
+      :class="[
+        'inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg',
+        type === 'success' ? 'bg-green-500 text-white' : '',
+        type === 'warning' ? 'bg-yellow-500 text-white' : '',
+        type === 'error' ? 'bg-red-500 text-white' : '',
+      ]"
     >
-      <svg
-        aria-hidden="true"
-        class="h-5 w-5"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-          clip-rule="evenodd"
-        ></path>
-      </svg>
+      <Icon :name="type === 'success' ? 'ph:check' : 'ph:x'" />
       <span class="sr-only">Check icon</span>
     </div>
     <div class="ml-3 text-sm font-normal">{{ message }}</div>

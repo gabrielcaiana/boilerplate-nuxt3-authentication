@@ -3,6 +3,8 @@ useHead({
   title: 'Login',
 });
 
+const { $bus } = useNuxtApp();
+
 const { signIn } = useAuth();
 
 const router = useRouter();
@@ -20,6 +22,7 @@ const handleLogin = async () => {
     router.push('/');
   } catch (error) {
     console.error(error);
+    $bus.$emit('toast', { message: error, type: 'error' });
   } finally {
     data.loading = false;
   }
