@@ -156,6 +156,7 @@ export default () => {
 
   const logout = () => {
     return new Promise(async (resolve, reject) => {
+      setIsLoading(true);
       try {
         await useFetchApi('/api/auth/logout/', {
           method: 'POST',
@@ -166,6 +167,8 @@ export default () => {
         resolve(true);
       } catch (error) {
         reject(error);
+      } finally {
+        setIsLoading(false);
       }
     });
   };
