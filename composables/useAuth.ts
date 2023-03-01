@@ -114,7 +114,7 @@ export default () => {
       }
 
       // recalculates time remaining after token refresh attempt
-      const newJwt: JwtDecode = jwt_decode(useStateToken().value as string);
+      const newJwt: JwtDecode = jwt_decode(useStateToken().value);
       remainingTime = newJwt.exp * 1000 - Date.now() - 60000;
     }
   };
